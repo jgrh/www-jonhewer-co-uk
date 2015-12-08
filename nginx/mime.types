@@ -1,0 +1,10 @@
+types {
+    application/font-sfnt           ttf;
+    application/font-woff           woff;
+    application/javascript          js;
+    application/vnd.ms-fontobject   eot;
+    image/jpeg                      jpeg jpg;
+    image/svg+xml                   svg;
+    text/css                        css;
+    text/html                       html;
+}

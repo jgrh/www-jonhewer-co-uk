@@ -1,0 +1,128 @@
+@import "compass/css3";
+@import "compass/reset";
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,300,400,600);
+@include font-face("Entypo", font-files("/fonts/entypo.woff", "/fonts/entypo.ttf", "/fonts/entypo.svg"), "/fonts/entypo.eot");
+
+$body_background : #111111;
+$header_background : #FDFDFD;
+$header_text : #333333;
+$header_width: 200px;
+$highlight_text: #F01616;
+$photo_nav_text : #BBBBBB;
+
+body {
+    background: $body_background;
+    font: 12px "Open Sans", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    line-height: 2.5em;
+}
+
+#header {
+    background: $header_background;
+    bottom: 0px;
+    color: $header_text;
+    left: 0px;
+    position: fixed;
+    top: 0px;
+    width: $header_width;
+}
+
+#main {
+    bottom: 0px;
+    left: $header_width;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+}
+
+#nav {
+    left: 15px;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    a {
+        color: $header_text;
+        display: block;
+        font-size: 0.8em;
+        font-weight: 700;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+    a#home {
+        font-size: 1em;
+        span.jon {
+            color: $header_text;
+        }
+        span.hewer {
+            color: lighten($header_text, 25%);
+        }
+        span.photography {
+            color: lighten($header_text, 50%);
+        }
+    }
+    a:active,
+    a:hover {
+        color: $highlight_text;
+    }
+}
+
+#photo-nav {
+    $size : 30px;
+    $x : 20px;
+    font-family: "Entypo";
+    a {
+        color: $photo_nav_text;
+        display: block;
+        font-size: $size;
+        line-height: 1em;
+        margin-top: - $size / 2;
+        position: absolute;
+        text-decoration: none;
+        top: 50%;
+    }
+    a#previous {
+        left: $x;
+    }
+    a#next {
+        right: $x;
+    }
+    a.disabled {
+        display: none;
+    }
+    a:active,
+    a:hover {
+        color: $highlight_text;
+    }
+}
+
+#photo-container {
+    $x : 200px;
+    $y : 50px;
+    bottom: $y;
+    left: $x;
+    position: absolute;
+    right: $x;
+    top: $y;
+}
+
+#photo {
+    border: 1px solid #999999;
+    display: none;
+}
+
+#caption {
+    border-top: 1px solid lighten($header_text, 50%);
+    bottom: 15px;
+    font-style: italic;
+    left: 15px;
+    padding-top: 10px;
+    position: absolute;
+    right: 15px;
+    #title {
+        color: $header_text;
+    }
+    #date {
+        color: lighten($header_text, 50%);
+    }
+}

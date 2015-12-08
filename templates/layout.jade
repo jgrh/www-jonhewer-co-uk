@@ -1,0 +1,20 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/css/style.css')
+        script(data-main='/scripts/main', src='/scripts/require.js')
+    body
+        #header
+            block header
+                #nav
+                    a#home(href='/')
+                        span.jon Jon
+                        span &nbsp;
+                        span.hewer Hewer
+                        span &nbsp;
+                        span.photography Photography
+                    a#select(href='/') Selected Work
+                    a#contact(href='mailto:jonhewer@gmail.com') Contact
+        #main
+            block main
