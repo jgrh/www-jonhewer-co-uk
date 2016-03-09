@@ -12,39 +12,27 @@ function centre(width, height, parentWidth, parentHeight) {
 }
 
 require.config({
-    baseUrl: '/scripts'
+    baseUrl: "/scripts"
 });
 
 requirejs( [
-    'jquery',
-    'imagesloaded'
-], function ($, imagesLoaded) {
-    $('a.disabled').click(function(event){
-        event.preventDefault();
-    });
-
-    imagesLoaded('#photo', function (instance, image) {
+    "imagesloaded"
+], function (imagesLoaded) {
+    imagesLoaded("#photo", function (instance) {
         if (instance.images.length != 1) return;
 
-        var container = $('#photo-container');
-        var img = $(instance.images[0].img);
+        var container = document.getElementById("photo-container");
+        var image = document.getElementById("photo");
 
-        var resized = resize(img.width(),
-                             img.height(),
-                             container.width(),
-                             container.height()); 
+        var resized = resize(image.clientWidth, image.clientHeight, container.clientWidth, container.clientHeight);
+        var offset = centre(resized.width, resized.height, container.clientWidth, container.clientHeight);
 
-        var offset = centre(resized.width,
-                            resized.height,
-                            container.width(),
-                            container.height());
+        image.style.position = "absolute";
+        image.style.top = offset.top + "px";
+        image.style.left = offset.left + "px";
+        image.style.width = resized.width + "px";
+        image.style.height = resized.height + "px";
 
-        img.css('position', 'absolute');
-        img.css('top', offset.top);
-        img.css('left', offset.left);
-        img.css('width', resized.width);
-        img.css('height', resized.height);
-
-        img.fadeIn(1000);
+        image.className = "visible";
     });
 });

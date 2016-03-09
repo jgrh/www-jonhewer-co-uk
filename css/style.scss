@@ -108,7 +108,13 @@ body {
 
 #photo {
     border: 1px solid #999999;
-    display: none;
+    @include transition(opacity, 1s ease-in);
+    &.hidden {
+        opacity: 0;
+    }
+    &.visible {
+        opacity: 1;
+    }
 }
 
 #caption {

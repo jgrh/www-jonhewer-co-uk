@@ -11,4 +11,4 @@ block main
         a#previous(class=helpers.hasPrevious(image, album) ? undefined : 'disabled', href=helpers.hasPrevious(image, album) ? '#{helpers.previous(image, album).url}' : undefined) &#xe765;
         a#next(class=helpers.hasNext(image, album) ? undefined : 'disabled', href=helpers.hasNext(image, album) ? '#{helpers.next(image, album).url}' : undefined) &#xe766;
     #photo-container
-        img#photo(src="1000.jpg")
+        img#photo(class="hidden", src="1000.jpg")
