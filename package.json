@@ -4,7 +4,7 @@
   "scripts": {
     "build": "npm run clean && npm run lint && npm run compile && npm run package",
     "clean": "rm -rf ./target && mkdir ./target",
-    "compile": "lerret generate && compass compile . --sass-dir=css --css-dir=target/css && cp -r ./fonts ./scripts ./target",
+    "compile": "lerret generate && bundle exec compass compile . --sass-dir=css --css-dir=target/css && cp -r ./fonts ./scripts ./target",
     "lint": "eslint plugins templates/helpers.js",
     "package": "crane provision --tag `cat package.json | ./node_modules/json/lib/json.js version` --tag latest"
   },
