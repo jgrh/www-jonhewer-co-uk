@@ -4,15 +4,21 @@
   "scripts": {
     "build": "npm run clean && npm run lint && npm run compile && npm run package",
     "clean": "rm -rf ./target && mkdir ./target",
-    "compile": "lerret generate && bundle exec compass compile . --sass-dir=css --css-dir=target/css && cp -r ./fonts ./scripts ./target",
-    "lint": "eslint plugins templates/helpers.js",
+    "compile": "lerret generate && bundle exec compass compile . --sass-dir=css --css-dir=target/css && mkdir -p ./target/scripts && browserify -g uglifyify ./scripts/index.js -o ./target/scripts/bundle.js && cp -r ./fonts ./target",
+    "lint": "eslint scripts/index.js plugins templates/helpers.js",
     "package": "crane provision --tag `cat package.json | ./node_modules/json/lib/json.js version`"
+  },
+  "dependencies": {
+    "domready": "^1.0.8",
+    "imagesloaded": "^4.1.0"
   },
   "devDependencies": {
     "bluebird": "^3.3.3",
+    "browserify": "^13.0.0",
     "eslint": "^2.3.0",
     "json": "^9.0.3",
     "lerret": "^0.1.2",
-    "lodash": "^4.6.1"
+    "lodash": "^4.6.1",
+    "uglifyify": "^3.0.1"
   }
 }
