@@ -13,11 +13,11 @@
     "imagesloaded": "^4.1.0"
   },
   "devDependencies": {
-    "bluebird": "^3.3.3",
+    "bluebird": "^3.3.4",
     "browserify": "^13.0.0",
-    "eslint": "^2.3.0",
+    "eslint": "^2.4.0",
     "json": "^9.0.3",
-    "lerret": "^0.1.2",
+    "lerret": "^0.2.0",
     "lodash": "^4.6.1",
     "uglifyify": "^3.0.1"
   }
