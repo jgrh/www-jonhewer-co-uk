@@ -15,17 +15,18 @@ plugins:
   - attributes
   - urls
   - jade
-  - resize
+  - convert
 jade:
   helpers: ./templates/helpers.js
   templates:
     album: ./templates/album.jade
     home: ./templates/home.jade
     image: ./templates/photo.jade
-resize:
+convert:
   - filename: 1000.jpg
-    width: 1000
-    height: 1000
+    resize:
+      width: 1000
+      height: 1000
     quality: 80
     unsharp:
       radius: 0.5
