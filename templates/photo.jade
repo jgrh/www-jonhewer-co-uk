@@ -1,10 +1,5 @@
 extends layout
 
-block append header
-    #caption
-        #title #{image.name}
-        #date #{image.year}
-
 block main
     #photo-nav
         p= image.next
@@ -12,3 +7,7 @@ block main
         a#next(class=helpers.hasNext(image, album) ? undefined : 'disabled', href=helpers.hasNext(image, album) ? '#{helpers.next(image, album).url}' : undefined) &#xe766;
     #photo-container
         img#photo(class="hidden", src="1000.jpg")
+block footer
+    #caption
+        #title #{image.name}
+        #date #{image.year}

@@ -34,4 +34,8 @@ domready(function () {
             return resizeAndShow(instance.images[0].img);
         }
     });
+
+    document.getElementById("nav-toggle").addEventListener("click", function () {
+        document.getElementById("menu").classList.toggle("expand");
+    });
 });

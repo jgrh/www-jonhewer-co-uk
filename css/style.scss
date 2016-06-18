@@ -1,70 +1,204 @@
 @import "compass/css3";
 @import "compass/reset";
+@import "compass/utilities/general/clearfix";
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,300,400,600);
 @include font-face("Entypo", font-files("/fonts/entypo.woff", "/fonts/entypo.ttf", "/fonts/entypo.svg"), "/fonts/entypo.eot");
 
-$body_background : #111111;
-$header_background : #FDFDFD;
-$header_text : #333333;
-$header_width: 200px;
-$highlight_text: #F01616;
-$photo_nav_text : #BBBBBB;
+@mixin device($device) {
+    $phone-width: 400px;
+    $tablet-width: 920px;
+    @if $device == phones {
+        @media screen and (max-width: $phone-width) { @content; }
+    }
+    @else if $device == tablets {
+        @media screen and (min-width: $phone-width + 1) and (max-width: $tablet-width) { @content; }
+    }
+    @else if $device == handhelds {
+        @media screen and (max-width: $tablet-width) { @content; }
+    }
+    @else if $device == non-handhelds {
+        @media screen and (min-width: $tablet-width + 1) { @content; }
+    }
+}
+
+$bg_dark : #111111;
+$bg_light : #FDFDFD;
+$text_dark : #333333;
+$text_highlight: #F01616;
+$text_light : #BBBBBB;
+
+$handhelds_header_height: 54px;
+$handhelds_footer_height: 44px;
+$non_handhelds_nav_width: 200px;
 
 body {
-    background: $body_background;
+    background: $bg_dark;
     font: 12px "Open Sans", Helvetica, Arial, sans-serif;
     font-weight: 400;
-    line-height: 2.5em;
+    line-height: 24px;
+}
+
+#caption {
+    font-style: italic;
+    #date {
+        color: lighten($text_dark, 50%);
+    }
+    #title {
+        color: $text_dark;
+    }
+    @include device(handhelds) {
+        padding: 10px;
+        text-align: center;
+        div {
+            display: inline-block;
+        }
+        div+div {
+            padding-left: 5px;
+        }
+    }
+    @include device(non-handhelds) {
+        border-top: 1px solid lighten($text_dark, 60%);
+        margin: 15px;
+        padding-top: 15px;
+    }
+}
+
+#footer {
+    background: $bg_light;
+    bottom: 0px;
+    left: 0px;
+    position: fixed;
+    @include device(handhelds) {
+        height: $handhelds_footer_height;
+        right: 0px;
+    }
+    @include device(non-handhelds) {
+        width: $non_handhelds_nav_width;
+    }
 }
 
 #header {
-    background: $header_background;
-    bottom: 0px;
-    color: $header_text;
-    left: 0px;
-    position: fixed;
-    top: 0px;
-    width: $header_width;
+    $padding: 15px;
+    padding: $padding;
+    a {
+        span.jon {
+            color: $text_dark;
+        }
+        span.hewer {
+            color: lighten($text_dark, 25%);
+        }
+        span.photography {
+            color: lighten($text_dark, 50%);
+        }
+    }
+    @include device(handhelds) {
+        height: $handhelds_header_height - ($padding * 2);
+        a {
+            float: left;
+        }
+        button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            float: right;
+            outline: none;
+            padding: 3px 0px;
+            span.icon-bar {
+                background-color: $text_dark;
+                border-radius: 1px;
+                display: block;
+                height: 2px;
+                width: 22px;
+            }
+            span.icon-bar+span.icon-bar {
+                margin-top: 6px;
+            }
+        }
+        @include clearfix();
+    }
+    @include device(non-handhelds) {
+        button {
+            display: none;
+        }
+    }
 }
 
 #main {
-    bottom: 0px;
-    left: $header_width;
     position: fixed;
     right: 0px;
-    top: 0px;
+    z-index: -1;
+    @include device(handhelds) {
+        bottom: $handhelds_footer_height;
+        left: 0px;
+        top: $handhelds_header_height;
+    }
+    @include device(non-handhelds) {
+        bottom: 0px;
+        left: $non_handhelds_nav_width;
+        top: 0px;
+    }
+}
+
+ul#menu {
+    list-style-type: none;
+    margin-top: -20px;
+    padding: 15px;
+    a {
+        font-size: 0.8em;
+    }
+    @include device(handhelds) {
+        display: none;
+        &.expand {
+            display: block;
+        }
+    }
 }
 
 #nav {
-    left: 15px;
-    position: absolute;
-    right: 15px;
-    top: 10px;
+    background: $bg_light;
+    color: $text_dark;
+    left: 0px;
+    position: fixed;
+    top: 0px;
     a {
-        color: $header_text;
-        display: block;
-        font-size: 0.8em;
+        color: $text_dark;
         font-weight: 700;
         text-decoration: none;
         text-transform: uppercase;
     }
-    a#home {
-        font-size: 1em;
-        span.jon {
-            color: $header_text;
-        }
-        span.hewer {
-            color: lighten($header_text, 25%);
-        }
-        span.photography {
-            color: lighten($header_text, 50%);
-        }
-    }
     a:active,
     a:hover {
-        color: $highlight_text;
+        color: $text_highlight;
     }
+    @include device(handhelds) {
+        right: 0px;
+    }
+    @include device(non-handhelds) {
+        bottom: 0px;
+        width: $non_handhelds_nav_width;
+    }
+}
+
+#photo {
+    border: 1px solid #999999;
+    @include transition(opacity, 1s ease-in);
+    &.hidden {
+        opacity: 0;
+    }
+    &.visible {
+        opacity: 1;
+    }
+}
+
+#photo-container {
+    $x : 15%;
+    $y : 15%;
+    bottom: $y;
+    left: $x;
+    position: absolute;
+    right: $x;
+    top: $y;
 }
 
 #photo-nav {
@@ -72,7 +206,7 @@ body {
     $x : 20px;
     font-family: "Entypo";
     a {
-        color: $photo_nav_text;
+        color: $text_light;
         display: block;
         font-size: $size;
         line-height: 1em;
@@ -92,43 +226,6 @@ body {
     }
     a:active,
     a:hover {
-        color: $highlight_text;
-    }
-}
-
-#photo-container {
-    $x : 200px;
-    $y : 50px;
-    bottom: $y;
-    left: $x;
-    position: absolute;
-    right: $x;
-    top: $y;
-}
-
-#photo {
-    border: 1px solid #999999;
-    @include transition(opacity, 1s ease-in);
-    &.hidden {
-        opacity: 0;
-    }
-    &.visible {
-        opacity: 1;
-    }
-}
-
-#caption {
-    border-top: 1px solid lighten($header_text, 50%);
-    bottom: 15px;
-    font-style: italic;
-    left: 15px;
-    padding-top: 10px;
-    position: absolute;
-    right: 15px;
-    #title {
-        color: $header_text;
-    }
-    #date {
-        color: lighten($header_text, 50%);
+        color: $text_highlight;
     }
 }
