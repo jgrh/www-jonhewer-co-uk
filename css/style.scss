@@ -182,7 +182,7 @@ ul#menu {
 
 #photo {
     border: 1px solid #999999;
-    @include transition(opacity, 1s ease-in);
+    @include transition(opacity 1s ease-in);
     &.hidden {
         opacity: 0;
     }
