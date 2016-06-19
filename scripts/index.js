@@ -1,37 +1,37 @@
 "use strict";
 
-/*global document*/
+/*global document, window*/
 
 var domready = require("domready");
 var imagesloaded = require("imagesloaded");
 
-function resizeAndShow(image) {
-    function px(value) {
-        return value + "px";
-    }
-
-    var container = document.getElementById("photo-container");
-
-    if ((image.clientWidth / image.clientHeight) >= (container.clientWidth / container.clientHeight)) {
-        image.style.width = px(container.clientWidth);
-        image.style.height = px(image.clientHeight * (container.clientWidth / image.clientWidth));
+function fit(image, container) {
+    if ((image.naturalWidth / image.naturalHeight) >= (container.clientWidth / container.clientHeight)) {
+        image.style.width = container.clientWidth + "px";
+        image.style.height = image.naturalHeight * (container.clientWidth / image.naturalWidth) + "px";
     }
     else {
-        image.style.width = px(image.clientWidth * (container.clientHeight / image.clientHeight));
-        image.style.height = px(container.clientHeight);
+        image.style.width = image.naturalWidth * (container.clientHeight / image.naturalHeight) + "px";
+        image.style.height = container.clientHeight + "px";
     }
 
     image.style.position = "absolute";
-    image.style.top = px((container.clientHeight - image.clientHeight) / 2);
-    image.style.left = px((container.clientWidth - image.clientWidth) / 2);
-
-    image.className = "visible";
+    image.style.top = (container.clientHeight - image.clientHeight) / 2 + "px";
+    image.style.left = (container.clientWidth - image.clientWidth) / 2 + "px";
 }
 
 domready(function () {
     imagesloaded("#photo", function (instance) {
         if (instance.images.length === 1) {
-            return resizeAndShow(instance.images[0].img);
+            var image = instance.images[0].img;
+            var container = document.getElementById("photo-container");
+
+            window.addEventListener("resize", function () {
+                fit(image, container);
+            });
+
+            fit(image, container);
+            image.className = "visible";
         }
     });
 
