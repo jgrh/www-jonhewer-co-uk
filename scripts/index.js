@@ -1,9 +1,10 @@
 "use strict";
 
-/*global document, window*/
+/*global document*/
 
-var domready = require("domready");
-var imagesloaded = require("imagesloaded");
+var addResizeEvent = require("element-resize-event");
+var domReady = require("domready");
+var imagesLoaded = require("imagesloaded");
 
 function fit(image, container) {
     if ((image.naturalWidth / image.naturalHeight) >= (container.clientWidth / container.clientHeight)) {
@@ -20,13 +21,13 @@ function fit(image, container) {
     image.style.left = (container.clientWidth - image.clientWidth) / 2 + "px";
 }
 
-domready(function () {
-    imagesloaded("#photo", function (instance) {
+domReady(function () {
+    imagesLoaded("#photo", function (instance) {
         if (instance.images.length === 1) {
             var image = instance.images[0].img;
             var container = document.getElementById("photo-container");
 
-            window.addEventListener("resize", function () {
+            addResizeEvent(container, function () {
                 fit(image, container);
             });
 

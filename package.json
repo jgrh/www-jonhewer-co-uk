@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "domready": "^1.0.8",
+    "element-resize-event": "^2.0.5",
     "imagesloaded": "^4.1.0"
   },
   "devDependencies": {
