@@ -1,8 +1,0 @@
-containers:
-    website:
-        image: www-jonhewer-co-uk
-        run:
-            detach: true
-            publish: ["80:80"]
-            restart: always
-            volume: ["target:/var/www"]
