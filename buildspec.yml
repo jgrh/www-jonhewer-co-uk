@@ -7,18 +7,19 @@ phases:
         commands:
             - $(aws ecr get-login --region eu-west-1)
             - docker pull $AWS_ECR_REGISTRY/www-jonhewer-co-uk-build:latest
-            - echo $(sed -nr 's/^\s*"version":\s*"([0-9\.]*)",$/\1/p' package.json) > version
+            - echo $(sed -nr 's/^\s*"version":\s*"([0-9\.]*)",$/\1/p' package.json) > VERSION
     build:
         commands:
             - docker run --volume $(pwd):/src --workdir /src $AWS_ECR_REGISTRY/www-jonhewer-co-uk-build:latest /bin/bash -c "npm install && npm run clean-build"
             - docker build -t $AWS_ECR_REGISTRY/www-jonhewer-co-uk:latest .
-            - docker tag $AWS_ECR_REGISTRY/www-jonhewer-co-uk:latest $AWS_ECR_REGISTRY/www-jonhewer-co-uk:$(cat version)
+            - docker tag $AWS_ECR_REGISTRY/www-jonhewer-co-uk:latest $AWS_ECR_REGISTRY/www-jonhewer-co-uk:$(cat VERSION)
     post_build:
         commands:
             - docker push $AWS_ECR_REGISTRY/www-jonhewer-co-uk:latest
-            - docker push $AWS_ECR_REGISTRY/www-jonhewer-co-uk:$(cat version)
-            - echo {\"Parameters\":{\"ContainerVersion\":\"$(cat version)\"}} > configuration.json
+            - docker push $AWS_ECR_REGISTRY/www-jonhewer-co-uk:$(cat VERSION)
+            - sed -i "s/VERSION/$(cat VERSION)/" cloudformation/configuration.json
 artifacts:
     files:
-        - cloudformation.yml
-        - configuration.json
+        - cloudformation/template.yml
+        - cloudformation/configuration.json
+    discard-paths: yes
