@@ -66,7 +66,7 @@ Resources:
     Properties:
       IamInstanceProfile:
         Ref: "EcsInstanceProfile"
-      ImageId: "ami-ba346ec9"
+      ImageId: "ami-e3fbd290"
       InstanceType: "t2.nano"
       KeyName: "id_rsa"
       SecurityGroupIds:
