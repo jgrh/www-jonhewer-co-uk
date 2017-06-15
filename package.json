@@ -1,5 +1,5 @@
 {
-  "version": "1.6.0",
+  "version": "1.6.1",
   "private": true,
   "scripts": {
     "build": "eslint scripts/index.js plugins templates/helpers.js && lerret generate && compass compile . --sass-dir=css --css-dir=target/css && mkdir -p ./target/scripts && browserify -g uglifyify ./scripts/index.js -o ./target/scripts/bundle.js && cp -r ./fonts ./target",
