@@ -13,11 +13,11 @@
   },
   "devDependencies": {
     "bluebird": "^3.5.0",
-    "browserify": "^14.1.0",
-    "eslint": "^3.18.0",
+    "browserify": "^14.4.0",
+    "eslint": "^4.0.0",
     "json": "^9.0.6",
-    "lerret": "^0.4.7",
+    "lerret": "^0.4.8",
     "lodash": "^4.17.4",
-    "uglifyify": "^3.0.2"
+    "uglifyify": "^4.0.0"
   }
 }
