@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  ServiceName:
+    Description: The name of the service
+    Type: String
+  WebsiteHostname:
+    Description: The hostname of the website
+    Type: String
+Resources:
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref 'WebsiteHostname'
+      WebsiteConfiguration:
+        IndexDocument: index.html
