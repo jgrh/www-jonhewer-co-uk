@@ -1,2 +1,2 @@
 include ./mixins.pug
-+redirect(site.albums[0].images[0].url)
++redirect(site.albums.find(album => album.name == "Selected Work").images[0].url)

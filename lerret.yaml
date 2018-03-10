@@ -1,12 +1,9 @@
 contentDirectory: ./content
 targetDirectory: ./target
 sort:
-  albums:
-    property: name
-    order: desc
   images:
     property:
-      - addDate
+      - order
       - exif.CreateDate
     order:
       - desc
