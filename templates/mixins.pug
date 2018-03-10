@@ -2,8 +2,8 @@ mixin redirect(url)
     doctype html
     html
         head
-        link(rel="canonical", href="#{url}")
+        link(rel="canonical", href=url)
         noscript
-            meta(http-equiv="refresh", content="0;URL=#{url}")
+            meta(http-equiv="refresh", content="0;URL=" + url)
         script(type="text/javascript").
             window.location.replace("#{url}");

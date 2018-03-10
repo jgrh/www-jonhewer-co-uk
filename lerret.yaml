@@ -14,14 +14,14 @@ sort:
 plugins:
   - attributes
   - urls
-  - jade
+  - pug
   - convert
-jade:
+pug:
   helpers: ./templates/helpers.js
   templates:
-    album: ./templates/album.jade
-    home: ./templates/home.jade
-    image: ./templates/photo.jade
+    album: ./templates/album.pug
+    home: ./templates/home.pug
+    image: ./templates/photo.pug
 convert:
   - filename: 1000.jpg
     resize:
