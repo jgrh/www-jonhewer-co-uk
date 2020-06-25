@@ -8,16 +8,16 @@
   },
   "dependencies": {
     "domready": "^1.0.8",
-    "element-resize-event": "^2.0.9",
+    "element-resize-event": "^3.0.3",
     "imagesloaded": "^4.1.4"
   },
   "devDependencies": {
-    "bluebird": "^3.5.1",
-    "browserify": "^16.1.1",
-    "eslint": "^4.18.2",
+    "bluebird": "^3.7.2",
+    "browserify": "^16.5.1",
+    "eslint": "^7.3.1",
     "json": "^9.0.6",
-    "lerret": "^1.0.0",
-    "lodash": "^4.17.5",
-    "uglifyify": "^4.0.5"
+    "lerret": "^2.0.0",
+    "lodash": "^4.17.15",
+    "uglifyify": "^5.0.2"
   }
 }
