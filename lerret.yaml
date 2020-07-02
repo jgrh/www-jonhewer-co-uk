@@ -1,6 +1,11 @@
 contentDirectory: ./content
 targetDirectory: ./target
 sort:
+  albums:
+    property:
+      - order
+    order:
+      - asc
   images:
     property:
       - order
@@ -9,24 +14,62 @@ sort:
       - desc
       - desc
 plugins:
-  - attributes
   - urls
+  - banners
+  - attributes
   - pug
   - convert
 pug:
-  helpers: ./templates/helpers.js
   templates:
     album: ./templates/album.pug
     home: ./templates/home.pug
-    image: ./templates/photo.pug
 convert:
-  - filename: 1000.jpg
+  - filename: 768.jpg
     resize:
-      width: 1000
-      height: 1000
-    quality: 80
+      width: 768
+      height: 768
+    quality: 90
     unsharp:
       radius: 0.5
       sigma: 0.5
-      amount: 0.5
+      amount: 1
       threshold: 0.01
+  - filename: album.jpg
+    resize:
+      width: 1920
+      height: 1920
+    quality: 70
+    unsharp:
+      radius: 0.5
+      sigma: 0.5
+      amount: 1
+      threshold: 0.01
+    match:
+      property: banner
+      regex: album
+  - filename: thumbnail.jpg
+    resize:
+      width: 384
+      height: 384
+    quality: 70
+    unsharp:
+      radius: 0.5
+      sigma: 0.5
+      amount: 1
+      threshold: 0.01
+    match:
+      property: banner
+      regex: album
+  - filename: site.jpg
+    resize:
+      width: 1920
+      height: 1920
+    quality: 70
+    unsharp:
+      radius: 0.5
+      sigma: 0.5
+      amount: 1
+      threshold: 0.01
+    match:
+      property: banner
+      regex: site

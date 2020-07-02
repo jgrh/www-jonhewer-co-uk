@@ -1,2 +1,13 @@
-include ./mixins.pug
-+redirect(site.albums.find(album => album.name == "Selected Work").images[0].url)
+extends layout
+
+block variables
+    - var banner_title = "Jon Hewer Photography"
+    - var banner_image = site.banner_image.url + "/site.jpg"
+
+append main
+    ul#albums
+        each album in site.albums
+            li
+                a(href=album.url)
+                    .album(style="background-image: url('" + album.banner_image.url + "/thumbnail.jpg');")
+                        p= album.name

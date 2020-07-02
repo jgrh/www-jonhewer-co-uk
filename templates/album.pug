@@ -1,2 +1,17 @@
-include ./mixins.pug
-+redirect(album.images[0].url)
+extends layout
+
+block variables
+    - var page = album.url
+    - var banner_title = album.name
+    - var banner_image = album.banner_image.url + "/album.jpg"
+
+append main
+    #photos
+        ul
+            each image, index in album.images
+                li(class=image.orientation, class=["caption_left", "caption_right"][index % 2])
+                    div.photo
+                        img(src=image.url + "/768.jpg")
+                    div.caption
+                        p.photo_title= image.name
+                        p.photo_date= image.year

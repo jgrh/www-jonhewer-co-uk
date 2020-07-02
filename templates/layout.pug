@@ -1,3 +1,5 @@
+block variables
+
 doctype html
 html
     head
@@ -7,30 +9,46 @@ html
         link(rel='stylesheet', href='/css/style.css')
         script(src='/scripts/bundle.js')
     body
-        #nav
-            #header
-                a(href='/')
-                    span.jon Jon
-                    span &nbsp;
-                    span.hewer Hewer
-                    span &nbsp;
-                    span.photography Photography
-                button#nav-toggle
-                    span.icon-bar
-                    span.icon-bar
-                    span.icon-bar
-            ul#menu
-                li
-                    a#select(href='/') Selected Work
-                li
-                    a#select(href='/iceland') Iceland
-                li
-                    a#select(href='/yosemite') Yosemite
-                li
-                    a#500px(href='https://500px.com/jonhewer') 500px
-                li
-                    a#contact(href='mailto:jonhewer@gmail.com') Contact
-        #main
-            block main
-        #footer
-            block footer
+        #banner(style="background-image: url('" + banner_image + "');")
+            p= banner_title
+            a.arrow(href='#anchor') ↓
+        #page
+            #main
+                block main
+                    #nav
+                        div
+                            #nav-title
+                                a(href='/')
+                                    span.jon Jon
+                                    span.hewer Hewer
+                                    span.photography Photography
+                                button#nav-toggle
+                                    span.icon-bar
+                                    span.icon-bar
+                                    span.icon-bar
+                            ul#nav-menu
+                                each album in site.albums
+                                    li
+                                        a(class=(page===album.url ? 'selected' : ''), href=album.url) #{album.name}
+                    a#anchor
+            #footer
+                block footer
+                    #footer-index
+                        ul
+                            li.first Albums
+                            each album in site.albums
+                                li
+                                    a(href=album.url) #{album.name}
+                        ul
+                            li.first Social
+                            li
+                                a(href="https://500px.com/jonhewer") 500px
+                            li
+                                a(href="https://www.instagram.com/jonhewer") Instagram
+                            li
+                                a(href="mailto:jonhewer@gmail.com") Contact
+                    #footer-footnote
+                        p
+                            a(href='/') Jon Hewer Photography
+                        p Website created with ♥ using #[a(href="https://github.com/jgrh/lerret") Lerret].
+                        p Copyright © #{(new Date()).getFullYear()}.
