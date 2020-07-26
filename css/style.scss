@@ -31,7 +31,6 @@ body {
 
 #banner {
     align-items: center;
-    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -44,6 +43,14 @@ body {
     position: relative;
     width: 100%;
     z-index: 10;
+
+    @include device(mobiles) {
+        background-attachment: scroll;
+    }
+
+    @include device(desktops) {
+        background-attachment: fixed;
+    }
 
     p {
         font-weight: 100;
